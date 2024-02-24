@@ -42,7 +42,7 @@ public class DrinksFragment extends Fragment {
         drinks.add(new MenuItem("Голубая лагуна", R.drawable.drink3, "Невероятно комбинированный" +
                 " вкус джина и вишни", 700));
         drinks.add(new MenuItem("Маргарита", R.drawable.drink4, "Нежный вкусный" +
-                " пкоктейль", 300));
+                " коктейль", 300));
 
         ArrayList<MenuItem> orders = new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class DrinksFragment extends Fragment {
         });
     }
 
-    private int countSum(ArrayList<MenuItem> orders) {
+    public static int countSum(ArrayList<MenuItem> orders) {
        int res = 0;
         for (int i = 0; i < orders.size(); i++) {
             res += orders.get(i).getPrice();
