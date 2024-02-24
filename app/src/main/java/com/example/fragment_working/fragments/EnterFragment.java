@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import com.example.fragment_working.MapActivity;
 import com.example.fragment_working.R;
 import com.example.fragment_working.adapters.ChooseAdapter;
 import com.example.fragment_working.models.Model;
+import com.example.fragment_working.models.Repository;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,8 @@ public class EnterFragment extends Fragment implements View.OnTouchListener{
     private RecyclerView recyclerView;
     private FragmentManager fragmentManager;
     private Fragment fragment;
+
+    Button btn;
 
     @Nullable
     @Override
@@ -41,11 +45,23 @@ public class EnterFragment extends Fragment implements View.OnTouchListener{
         models.add(new Model(R.drawable.drinks_menu, "Напитки"));
         models.add(new Model(R.drawable.food_menu, "Еда"));
         models.add(new Model(R.drawable.navigation, "Карта заведения"));
+        btn = view.findViewById(R.id.btn_bill);
 
         ChooseAdapter adapter = new ChooseAdapter(getActivity(), models);  //Адаптер для связки списка моделей и разметки
         recyclerView.setAdapter(adapter);  //назначаем адаптер списку
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));  //назначаем в каком виде выведется на экран
 
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Repository.fragment = new BillFragment();
+                Repository.fragmentManager
+                        .beginTransaction()
+                        .addToBackStack("enter")
+                        .replace(R.id.fragment_container, Repository.fragment)
+                        .commit();
+            }
+        });
         adapter.setListener(new ChooseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {

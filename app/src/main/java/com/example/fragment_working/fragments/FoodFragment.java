@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fragment_working.R;
 import com.example.fragment_working.adapters.MenuAdapter;
 import com.example.fragment_working.models.MenuItem;
+import com.example.fragment_working.models.Repository;
 
 import java.util.ArrayList;
 
@@ -47,6 +48,7 @@ public class FoodFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 orders.add(foods.get(position));
+                Repository.items.add(foods.get(position));
                 Toast.makeText(getActivity(),"Сумма заказа: " + String.valueOf(DrinksFragment.countSum(orders)), Toast.LENGTH_LONG).show();
             }
         });
