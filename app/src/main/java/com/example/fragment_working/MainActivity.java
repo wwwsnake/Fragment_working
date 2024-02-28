@@ -13,11 +13,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Repository.fragmentManager = getSupportFragmentManager();  //инициализируем менеджер фрагментов
-        if (Repository.fragment == null) {
+
             Repository.fragment = new MainFragment();
             Repository.fragmentManager.beginTransaction()
                     .add(R.id.fragment_container, Repository.fragment).commit();
-        }
+
 
 
 //    private void result (int money){

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,11 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fragment_working.R;
 import com.example.fragment_working.adapters.MenuAdapter;
 import com.example.fragment_working.models.MenuItem;
+import com.example.fragment_working.models.Repository;
 
 import java.util.ArrayList;
 
-public class DrinksFragment extends Fragment {
+public class DrinksFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
+    private Button button;
 
     @Nullable
     @Override
@@ -33,6 +36,8 @@ public class DrinksFragment extends Fragment {
 
     private void init(View view) {
       recyclerView = view.findViewById(R.id.drinks_list);
+      button = view.findViewById(R.id.btn_back);
+      button.setOnClickListener(this);
 
         ArrayList<MenuItem> drinks = new ArrayList<>();
         drinks.add(new MenuItem("Пина колада", R.drawable.drink1, "Легкий и невероятно " +
@@ -64,5 +69,21 @@ public class DrinksFragment extends Fragment {
             res += orders.get(i).getPrice();
         }
         return res;
+    }
+
+    /*
+    Стек - структура данных работающая по принципу LIFO(Last in first out) - последним зашел, первым
+    вышел. Аналогия со стопкой блинов - первым берется верхний, который последним был положен.
+    Базовые операции стека: push(добавить) pop(извлечь) peak(показать вершину)
+    Обратная структура данных для стека - очередь
+
+    Задача: Есть математическое выражение удостовериться в правильности расположени скобок в этом
+    выражении
+    Например: []()(({})) - Правильное выражение, а [(]){}(({})) - выражение неправильное
+    Подсказка: Подумайте о стековом решении этой задачи
+     */
+    @Override
+    public void onClick(View v) {
+        Repository.fragmentManager.popBackStack();  //  Закрываем текущий фрагмент
     }
 }
